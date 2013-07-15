@@ -1,7 +1,13 @@
 package algorithms;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,11 +15,49 @@ import java.util.HashMap;
  * Date: 7/8/13
  */
 public class InversionCounter {
+
+    /**
+     * This main methods reads a file having one integer per line, and prints the number of inversions
+     * in the order of the integers from top to bottom
+     */
+    public static void main(String[] args){
+        BufferedReader reader = null;
+        InversionCounter counter = new InversionCounter();
+
+        try {
+            reader = new BufferedReader(new FileReader(counter.getClass().getResource("integers.txt").getFile()));
+
+            ArrayList<Integer> intArray = new ArrayList<Integer>();
+            String intString;
+
+            while ((intString = reader.readLine()) != null) {
+                intArray.add(Integer.parseInt(intString));
+            }
+
+            HashMap inversionCountResult = counter.countInversions(
+                    ArrayUtils.toPrimitive(intArray.toArray(new Integer[intArray.size()])));
+
+            System.out.println("Found " + inversionCountResult.get("count") + " inversions.");
+        } catch (IOException ex){
+            ex.printStackTrace();
+        } finally {
+            try {
+                if(reader != null) {
+                    reader.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
+
     public HashMap countInversions(int[] input){
 
         HashMap output = new HashMap();
         output.put("array", new int[1]);
-        output.put("count", 0);
+        output.put("count", 0L);
 
         // Basis step
         if (input.length <= 1){
@@ -31,9 +75,9 @@ public class InversionCounter {
                                                         (int[])rightHalfCounted.get("array"));
 
             output.put("array", splitCounted.get("array"));
-            output.put("count", ((Integer)leftHalfCounted.get("count") +
-                                 (Integer)rightHalfCounted.get("count") +
-                                 (Integer)splitCounted.get("count")));
+            output.put("count", ((Long)leftHalfCounted.get("count") +
+                                 (Long)rightHalfCounted.get("count") +
+                                 (Long)splitCounted.get("count")));
         }
 
         return output;
@@ -45,7 +89,7 @@ public class InversionCounter {
         int iLeft = 0;
         int iRight = 0;
 
-        int count = 0;
+        long count = 0;
 
         for (int k = 0; k < outputArray.length; k++){
             if (iLeft == left.length){
