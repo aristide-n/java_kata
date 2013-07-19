@@ -1,6 +1,5 @@
 package algorithms;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,7 +35,6 @@ public class InversionCounter {
 
             HashMap inversionCountResult = counter.countInversions(
                     ArrayUtils.toPrimitive(intArray.toArray(new Integer[intArray.size()])));
-
             System.out.println("Found " + inversionCountResult.get("count") + " inversions.");
         } catch (IOException ex){
             ex.printStackTrace();
@@ -59,7 +57,7 @@ public class InversionCounter {
         output.put("array", new int[1]);
         output.put("count", 0L);
 
-        // Basis step
+        // Base case
         if (input.length <= 1){
             output.put("array", input);
         }

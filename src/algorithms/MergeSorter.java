@@ -12,7 +12,7 @@ public class MergeSorter {
 
         int[] output;
 
-        // Basis step
+        // Base case
         if (input.length <= 1){
             output = input;
         }
