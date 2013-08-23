@@ -7,6 +7,8 @@ import java.util.HashMap;
  * Created with IntelliJ IDEA.
  * User: Aristide
  * Date: 7/22/13
+ *
+ * Find in an array two integers that sum to a third given
  */
 public class SumPairFinder {
     public static void main (String[] args){
