@@ -21,7 +21,7 @@ public class Loops {
         System.out.println();
 
         // Test Do
-        listIntegersLessThan(0);
+        listIntegersLessThan(10);
 
     }
 
@@ -48,7 +48,7 @@ public class Loops {
     public static void listIntegersLessThan(int max){
         int i = 0;
         do{
-            System.out.println("Number: " + 0);
+            System.out.println("Number: " + i);
             i++;
         } while ( i < max);
     }
