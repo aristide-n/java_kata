@@ -40,9 +40,11 @@ public class ClosestPairFinderTester {
                                  new Point2D.Double(500,400),
                                  new Point2D.Double(5000,4000),
                                  new Point2D.Double(50000,40000),
-                                 new Point2D.Double(5,4),                                 new Point2D.Double(5,4),
+                                 new Point2D.Double(5,4),
+                                 new Point2D.Double(5,4),
                                  new Point2D.Double(7,6)};
-        Point2D[] rFirstOutput = {new Point2D.Double(4,3),new Point2D.Double(5,4)};
+
+        Point2D[] rFirstOutput = {new Point2D.Double(4,3), new Point2D.Double(5,4)};
         if(Arrays.asList(rFirstOutput).containsAll(Arrays.asList(finder.findClosestPair(rFirstInput)))){
             System.out.println("First recursion test passed");
         }
