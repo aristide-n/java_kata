@@ -12,8 +12,10 @@
 
     <build>
         <!-- we dont want the version to be part of the generated war file name -->
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
     </build>
+
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -25,8 +27,9 @@
         <!-- Because this is a web app, we also have a dependency on the servlet api. -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.3</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Hibernate uses slf4j for logging, for our purposes here use the simple backend -->
@@ -44,9 +47,9 @@
         </dependency>
 
         <dependency>
-            <groupId>hsqldb</groupId>
+            <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>1.8.0.7</version>
+            <version>2.2.9</version>
         </dependency>
     </dependencies>
 
