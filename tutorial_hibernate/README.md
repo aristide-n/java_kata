@@ -1,0 +1,1 @@
+This is my implementation for the hibernate beginner tutorial:[http://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/tutorial.html](http://docs.jboss.org/hibernate/orm/3.3/reference/en-US/html/tutorial.html).
