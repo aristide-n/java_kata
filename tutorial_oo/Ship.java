@@ -8,7 +8,7 @@ import java.awt.Point;
  * Date: 6/8/13
  */
 public class Ship {
-    public double trip_time, speed, direction;
-    public Point position = new Point();
-    public String name;
+   public double trip_time, speed, direction;
+   public Point position = new Point();
+   public String name;
 }

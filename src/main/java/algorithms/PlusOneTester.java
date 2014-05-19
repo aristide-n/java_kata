@@ -10,21 +10,21 @@ import java.util.Arrays;
 public class PlusOneTester {
 
 
-    public static void main(String[] args) {
-        PlusOne adder = new PlusOne();
+   public static void main(String[] args) {
+      PlusOne adder = new PlusOne();
 
-        int[] testInputFirst = {1, 2, 3, 5};
-        int[] testOutputFirst = {1, 2, 3, 6};
+      int[] testInputFirst = {1, 2, 3, 5};
+      int[] testOutputFirst = {1, 2, 3, 6};
 
-        if (Arrays.equals(testOutputFirst, adder.plusOne(testInputFirst))) {
-            System.out.println("Simple addition works!");
-        }
+      if (Arrays.equals(testOutputFirst, adder.plusOne(testInputFirst))) {
+         System.out.println("Simple addition works!");
+      }
 
-        int[] testInputSecond = {9, 9, 9};
-        int[] testOutputSecond = {1, 0, 0, 0};
+      int[] testInputSecond = {9, 9, 9};
+      int[] testOutputSecond = {1, 0, 0, 0};
 
-        if (Arrays.equals(testOutputSecond, adder.plusOne(testInputSecond))) {
-            System.out.println("Tricky addition works!");
-        }
-    }
+      if (Arrays.equals(testOutputSecond, adder.plusOne(testInputSecond))) {
+         System.out.println("Tricky addition works!");
+      }
+   }
 }
