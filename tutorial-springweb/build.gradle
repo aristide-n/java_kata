@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+   compile(
+         'org.springframework:spring-web:3.0.5.RELEASE',
+         'log4j:log4j:1.2.14',
+         '')
+   compile('org.springframework:spring-core:3.0.5.RELEASE') {
+      exclude group: 'commons-logging', module: 'commons-logging'
+   }
+   compile group: '', name: '', version: ''
+   compile group: '', name: '', version: ''
+   compile group: '', name: '', version: ''
+
+   testCompile group: 'junit', name: 'junit', version: '4.11'
+}
