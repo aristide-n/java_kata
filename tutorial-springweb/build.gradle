@@ -17,6 +17,7 @@ dependencies {
       'log4j:log4j:1.2.14',
       'jstl:jstl:1.1.2',
       'taglibs:standard:1.1.2',
+      'commons-lang:commons-lang:2.3',
       'commons-digester:commons-digester:2.1',
       'commons-collections:commons-collections:3.2.1',
       'org.hibernate:hibernate-core:3.3.2.GA',

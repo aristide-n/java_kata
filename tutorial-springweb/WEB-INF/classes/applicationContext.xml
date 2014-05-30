@@ -23,15 +23,16 @@
 
    <bean id="messageSource"
          class="org.springframework.context.support.ResourceBundleMessageSource"
-         p:baseName="Messages"/>
+         p:basename="Messages"/>
 
-   <tx:annotation-driven transaction-manager="transactionManager"/>
+   <bean id="dataSource"
+         class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+         p:driverClassName="${jdbc.driverClassName}"
+         p:url="${jdbc.url}"
+         p:username="${jdbc.username}"
+         p:password="${jdbc.password}"/>
 
-   <bean id="transactionManager"
-         class="org.springframework.orm.hibernate3.HibernateTransactionManager"
-         p:sessionFactory-ref="sessionFactory"/>
-
-   <bean id="sessionfactory"
+   <bean id="sessionFactory"
          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
       <property name="dataSource" ref="dataSource"/>
       <property name="hibernateProperties">
@@ -40,13 +41,13 @@
             <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
          </props>
       </property>
-      <property name="packageToScan" value="com.aristideniyungeko"/>
+      <property name="packagesToScan" value="com.aristideniyungeko"/>
    </bean>
 
-   <bean id="dataSource"
-         class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-         p:driverClassName="${jdbc.driverClassName}"
-         p:url="${jdbc.url}"
-         p:username="${jdbc.username}"
-         p:password="${jdbc.password}"/>
+   <bean id="transactionManager"
+         class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+         p:sessionFactory-ref="sessionFactory"/>
+
+   <tx:annotation-driven transaction-manager="transactionManager"/>
+
 </beans>
