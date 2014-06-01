@@ -16,7 +16,6 @@ import java.util.List;
 @Transactional
 public class ContactsDAO {
 
-   // TODO sort out warning
    @Autowired private SessionFactory sessionFactory;
 
    public Contact getById(int id) {

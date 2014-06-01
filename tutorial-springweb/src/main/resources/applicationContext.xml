@@ -23,7 +23,7 @@
 
    <bean id="messageSource"
          class="org.springframework.context.support.ResourceBundleMessageSource"
-         p:basename="Messages"/>
+         p:basename="messages"/>
 
    <bean id="dataSource"
          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
