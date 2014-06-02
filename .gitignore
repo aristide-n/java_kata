@@ -8,3 +8,4 @@ out/
 .gradle
 production
 test
+build
