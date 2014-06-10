@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Script creates a graph data structure and finds min-cuts by repeating the Karger algorithm.
+ * Script creates a jgrapht graph and finds min-cuts by repeating the Karger algorithm.
  */
 public class FindMinCuts {
 

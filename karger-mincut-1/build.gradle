@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
    compile (
-      'org.jgrapht:jgrapht-core:0.9.0'
+      'org.jgrapht:jgrapht-core:0.9.0',
+      'org.apache.commons:commons-exec:1.2'
    )
 }
