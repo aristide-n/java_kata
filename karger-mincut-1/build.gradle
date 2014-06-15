@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'idea'
 
 sourceCompatibility = 1.5
 version = '1.0'
@@ -9,7 +10,6 @@ repositories {
 
 dependencies {
    compile (
-      'org.jgrapht:jgrapht-core:0.9.0',
-      'org.apache.commons:commons-exec:1.2'
+      'org.jgrapht:jgrapht-core:0.9.0'
    )
 }

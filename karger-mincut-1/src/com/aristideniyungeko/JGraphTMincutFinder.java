@@ -14,9 +14,14 @@ import java.util.Set;
 /**
  * Script creates a jgrapht graph and finds min-cuts by repeating the Karger algorithm.
  */
-public class FindMinCuts {
+public class JGraphTMincutFinder {
 
+   /**
+    * see kargerMinCut.txt
+    * @param textFilePath kargerMinCut.txt
+    */
    public Graph<Integer, DefaultEdge> createGraph(String textFilePath) throws IOException {
+      // Multigraph allows multiple edges between vertices but prohibits self-loops
       UndirectedGraph<Integer, DefaultEdge> graph = new Multigraph<>(DefaultEdge.class);
 
       BufferedReader br = new BufferedReader(new FileReader(textFilePath));
@@ -29,6 +34,8 @@ public class FindMinCuts {
          for(int i = 1; i < list.length; i++) {
             Integer rightNode = Integer.parseInt(list[i]);
             graph.addVertex(rightNode);
+
+            // at initialization prevent duplicate edges that double the size of the graph
             if (!graph.containsEdge(rightNode, leftNode))
                graph.addEdge(leftNode, rightNode);
          }
@@ -39,6 +46,11 @@ public class FindMinCuts {
       return graph;
    }
 
+   /**
+    * These graphs are not natively deep-cloneable :( do it manually
+    * @param graph
+    * @return
+    */
    public Graph<Integer, DefaultEdge> cloneGraph(Graph<Integer, DefaultEdge> graph) {
       Graph<Integer, DefaultEdge> graphClone = new Multigraph<>(DefaultEdge.class);
       Set<Integer> vertexSet = graph.vertexSet();
@@ -51,56 +63,68 @@ public class FindMinCuts {
       return graphClone;
    }
 
+   /**
+    * Algorithm:
+    *
+    * 1 Find set S of edges adjacent to targetV
+    * 2 For each edge in S except edges adjacent to Vs
+    * ++ add a new edge where sourceV is the target when targetV is the target and
+    *    sourceV is not the source
+    * ++ add a new edge where sourceV is the source when targetV is the source and
+    *    sourceV is not the source
+    * + remove targetV and all edges adjacent to it from graph
+    *
+    * @param edgeToContract
+    * @param graph
+    */
+   private void contract (DefaultEdge edgeToContract, Graph<Integer, DefaultEdge> graph) {
+      Integer sourceV = graph.getEdgeSource(edgeToContract);
+      Integer targetV = graph.getEdgeTarget(edgeToContract);
+
+      Set<DefaultEdge> edgesOfTargetV = graph.edgesOf(targetV);
+      for(final DefaultEdge edge : edgesOfTargetV) {
+         if(targetV.equals(graph.getEdgeTarget(edge))) {
+            if (!sourceV.equals(graph.getEdgeSource(edge))) {
+               graph.addEdge(graph.getEdgeSource(edge), sourceV);
+            }
+         } else if (!sourceV.equals(graph.getEdgeTarget(edge))) {
+            graph.addEdge(sourceV, graph.getEdgeTarget(edge));
+
+         }
+      }
+      graph.removeVertex(targetV);
+   }
+
+   /**
+    * Contract the graph down to 2 vertices by contracting random edges iteratively
+    *
+    * @param graph
+    * @return
+    */
    public int findMinCut(Graph<Integer, DefaultEdge> graph) {
-      /*
-       * Algorithm:
-       * until length of vertex set is 2
-       * + Get random edge E in edge set
-       * + get source Vs and target Vt of E
-       * + Find set S of edges adjacent to Vt
-       * + For each edge in S except edges adjacent to Vs
-       * + + add to the graph edge E2 where Vt is replaced with Vs
-       * + remove Vt  and all edges adjacent to it from graph
-       */
       Set<DefaultEdge> edgeSet = graph.edgeSet();
       Set<Integer> vertexSet = graph.vertexSet();
       DefaultEdge edgeToContract;
       Random randomizer = new Random();
-      Integer sourceV;
-      Integer targetV;
 
-      for(int i = vertexSet.size(); i > 2; i--) {
+      while (vertexSet.size() > 2) {
          edgeToContract = (DefaultEdge) edgeSet.toArray()[randomizer.nextInt(edgeSet.size())];
-
-         sourceV = graph.getEdgeSource(edgeToContract);
-         targetV = graph.getEdgeTarget(edgeToContract);
-
-         Set<DefaultEdge> edgesOfTargetV = graph.edgesOf(targetV);
-         for(final DefaultEdge edge : edgesOfTargetV) {
-            if(targetV.equals(graph.getEdgeTarget(edge))) {
-               if (!sourceV.equals(graph.getEdgeSource(edge))) {
-                  graph.addEdge(graph.getEdgeSource(edge), sourceV);
-               }
-            } else {
-               if (!sourceV.equals(graph.getEdgeTarget(edge))) {
-                  graph.addEdge(sourceV, graph.getEdgeTarget(edge));
-               }
-            }
-         }
-         graph.removeVertex(targetV);
-
+         this.contract(edgeToContract, graph);
       }
+
       return graph.edgeSet().size();
    }
 
    public static void main (String[] args) throws IOException {
-      FindMinCuts worker = new FindMinCuts();
-      Graph<Integer, DefaultEdge> graph = worker.createGraph("/provide/path/to/kargerMinCut.txt");
+      JGraphTMincutFinder worker = new JGraphTMincutFinder();
+      Graph<Integer, DefaultEdge> graph = worker.createGraph(
+         "/Users/aristide/WORKSPACE/java_kata/karger-mincut-1/src/com/aristideniyungeko/kargerMinCut.txt"
+      );
       double numTrials = Math.pow(graph.edgeSet().size(), 2.0) * Math.log(graph.edgeSet().size());
       int minCut = Integer.MAX_VALUE;
       int minCutTrial = 0;
 
-      for (int i = 0; i < 300; i++) {
+      for (int i = 0; i < 100; i++) {
          minCutTrial = worker.findMinCut(worker.cloneGraph(graph));
          if (minCutTrial < minCut)
             minCut = minCutTrial;

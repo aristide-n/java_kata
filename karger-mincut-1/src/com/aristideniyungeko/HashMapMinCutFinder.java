@@ -1,25 +1,26 @@
 package com.aristideniyungeko;
 
-import org.apache.commons.exec.util.MapUtils;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
-import java.util.function.UnaryOperator;
 
 /**
  * Script creates a HashMap backed graph and finds min-cuts by repeating the Karger algorithm.
  */
 public class HashMapMinCutFinder {
 
+   /**
+    * see kargerMinCut.txt
+    * @param textFilePath kargerMinCut.txt
+    * @return
+    * @throws IOException
+    */
    public Map<Integer, List<Integer>> createGraph(String textFilePath) throws IOException {
       Map<Integer, List<Integer>> graph = new HashMap<>();
 
@@ -43,34 +44,42 @@ public class HashMapMinCutFinder {
       return graph;
    }
 
-   private void contract(Integer sourceVertex, Integer targetVertex, Map<Integer, List<Integer>> graph) {
+   /**
+    * edge to contract is sourceVertex(S) <----> targetVertex (T)
+    * Algorithm:
+    * 1. append list of T's targets to list of S's targets
+    * 2. lookup list of targets for each T target and replace all T entries with S
+    * 3. remove S entries fro the list of S's targets (self loops)
+    * 4. remove T entry for the graph
+    *
+    * @param sourceVertex
+    * @param targetVertex
+    * @param graph
+    */
+   private void contract(Integer sourceVertex,
+                         Integer targetVertex,
+                         Map<Integer, List<Integer>> graph) {
 
-      /*
-      """Contracts two vertices from a randomly chosen edge in graph G into one single vertex
-       vert1 = the first vertex
-       vert2 = the second vertex, which will be shrinked into vert1
-       G = the input graph, represented by a dictionary"""
+      graph.get(sourceVertex).addAll(graph.get(targetVertex));
 
-       G[vert1].extend(G[vert2]) # append vert2's list to vert1's list
-       for adj_vert in G[vert2]: # for every adjacent node of vert2
-           lst = G[adj_vert]
-           for i in range(0, len(lst)): # scan its list and replace vert2 with vert1
-               if lst[i] == vert2:
-                   lst[i] = vert1
+      List<Integer> targetsOfTarget = graph.get(targetVertex);
 
-       while vert1 in G[vert1]: # remove self-loop in vert1's list
-           G[vert1].remove(vert1)
-       del G[vert2] # remove vert2 and its list from the graph
+      for (int i = 0; i < targetsOfTarget.size(); i++) {
+         graph.get(targetsOfTarget.get(i)).replaceAll(
+            vertex -> (vertex.equals(targetVertex)) ? sourceVertex : vertex
+         );
+      }
 
-       */
+      graph.get(sourceVertex).removeIf(vertex -> (vertex.equals(sourceVertex)));
 
-      /*
-      I can add and rm from graph here,
-      I can mutate value from graph here, i.e add an element in the list
-       */
-
+      graph.remove(targetVertex);
    }
 
+   /**
+    * Contract the graph down to 2 vertices by contracting random edges iteratively
+    * @param graph
+    * @return
+    */
    public int findMinCut(Map<Integer, List<Integer>> graph) {
 
       Random randomizer = new Random();
@@ -85,19 +94,27 @@ public class HashMapMinCutFinder {
       return graph.get(graph.keySet().toArray()[0]).size();
    }
 
+   public Map<Integer, List<Integer>> cloneGraph(Map<Integer, List<Integer>> graph) {
+      Map<Integer, List<Integer>> clone = new HashMap<>();
+      for (final Map.Entry<Integer, List<Integer>> entry : graph.entrySet()) {
+         clone.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+      }
+      return clone;
+   }
+
    public static void main (String[] args) throws IOException {
       HashMapMinCutFinder worker = new HashMapMinCutFinder();
-      Map<Integer, List<Integer>> graph = worker.createGraph("/Users/aristide/WORKSPACE/java_kata/karger-mincut-1/src/com/aristideniyungeko/kargerMinCut.txt");
+      Map<Integer, List<Integer>> graph = worker.createGraph(
+         "/Users/aristide/WORKSPACE/java_kata/karger-mincut-1/src/com/aristideniyungeko/kargerMinCut.txt"
+      );
       int minCut = Integer.MAX_VALUE;
       int minCutTrial = 0;
 
-//      for (int i = 0; i < 300; i++) {
-         minCutTrial = worker.findMinCut(MapUtils.copy(graph));
+      for (int i = 0; i < 100; i++) {
+         minCutTrial = worker.findMinCut(worker.cloneGraph(graph));
          if (minCutTrial < minCut)
             minCut = minCutTrial;
-//      }
-
-//      System.out.println(graph.keySet().toString());
+      }
 
       System.out.print(minCut);
    }
