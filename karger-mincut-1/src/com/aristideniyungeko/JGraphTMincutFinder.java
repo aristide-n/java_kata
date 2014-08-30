@@ -1,5 +1,6 @@
 package com.aristideniyungeko;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jgrapht.Graph;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
@@ -118,9 +119,10 @@ public class JGraphTMincutFinder {
    public static void main (String[] args) throws IOException {
       JGraphTMincutFinder worker = new JGraphTMincutFinder();
       Graph<Integer, DefaultEdge> graph = worker.createGraph(
+         // TODO use generic path
          "/Users/aristide/WORKSPACE/java_kata/karger-mincut-1/src/com/aristideniyungeko/kargerMinCut.txt"
       );
-      double numTrials = Math.pow(graph.edgeSet().size(), 2.0) * Math.log(graph.edgeSet().size());
+      String foo = StringUtils.join(graph.edgeSet(), " , ");
       int minCut = Integer.MAX_VALUE;
       int minCutTrial = 0;
 

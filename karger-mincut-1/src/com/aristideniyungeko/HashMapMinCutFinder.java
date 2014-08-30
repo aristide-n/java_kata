@@ -3,7 +3,6 @@ package com.aristideniyungeko;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +104,7 @@ public class HashMapMinCutFinder {
    public static void main (String[] args) throws IOException {
       HashMapMinCutFinder worker = new HashMapMinCutFinder();
       Map<Integer, List<Integer>> graph = worker.createGraph(
+         // TODO use generic path
          "/Users/aristide/WORKSPACE/java_kata/karger-mincut-1/src/com/aristideniyungeko/kargerMinCut.txt"
       );
       int minCut = Integer.MAX_VALUE;
