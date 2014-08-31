@@ -1,0 +1,5 @@
+mysql> create database spring_contacts;
+mysql> use spring_contacts;
+mysql> insert into contacts values (1, 'test',  'test st', 'F', '10,11,12', 'test@test.com', '123', '456');
+
+

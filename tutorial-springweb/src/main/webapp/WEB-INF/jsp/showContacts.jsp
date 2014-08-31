@@ -26,11 +26,6 @@
       </table>
    </form>
 
-   <c:if test="${empty SEARCH_CONTACTS_RESULTS_KEY}"></c:if>
-   <c:if test="${! empty SEARCH_CONTACTS_RESULTS_KEY}">
-      <c:forEach items="${SEARCH_CONTACTS_RESULTS_KEY}" var="contact"></c:forEach>
-   </c:if>
-
    <table border="1" bordercolor="#006699" style="border-collapse: collapse; width: 500px;">
       <tbody>
       <tr bgcolor="lightblue">
@@ -41,28 +36,33 @@
          <th></th>
       </tr>
 
-      <tr>
-         <td colspan="4">No Results found</td>
-      </tr>
-
-      <tr>
-         <td>
-            <c:out value="${contact.id}"></c:out>
-         </td>
-         <td>
-            <c:out value="${contact.name}"></c:out>
-         </td>
-         <td>
-            <c:out value="${contact.address}"></c:out>
-         </td>
-         <td>
-            <c:out value="${contact.mobile}"></c:out>
-         </td>
-         <td>
-            <a href="updateContact.do?id=${contact.id}">Edit</a>
-            <a href="javascript:deleteContact('deleteContact.do?id=${contact.id}');">Delete</a>
-         </td>
-      </tr>
+      <c:if test="${empty SEARCH_CONTACTS_RESULTS_KEY}">
+          <tr>
+             <td colspan="4">No Results found</td>
+          </tr>
+      </c:if>
+      <c:if test="${! empty SEARCH_CONTACTS_RESULTS_KEY}">
+        <c:forEach items="${SEARCH_CONTACTS_RESULTS_KEY}" var="contact">
+              <tr>
+                 <td>
+                    <c:out value="${contact.id}"></c:out>
+                 </td>
+                 <td>
+                    <c:out value="${contact.name}"></c:out>
+                 </td>
+                 <td>
+                    <c:out value="${contact.address}"></c:out>
+                 </td>
+                 <td>
+                    <c:out value="${contact.mobile}"></c:out>
+                 </td>
+                 <td>
+                    <a href="updateContact.do?id=${contact.id}">Edit</a>
+                    <a href="javascript:deleteContact('deleteContact.do?id=${contact.id}');">Delete</a>
+                 </td>
+              </tr>
+        </c:forEach>
+      </c:if>
       </tbody>
    </table>
 </center>

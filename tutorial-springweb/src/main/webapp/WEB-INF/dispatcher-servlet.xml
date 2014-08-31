@@ -1,4 +1,3 @@
-<!--TODO: delete a dupe of this file-->
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,3 +9,7 @@
          p:prefix="/WEB-INF/jsp/"
          p:suffix=".jsp"></bean>
 </beans>
+
+<!--
+  TODO: delete a dupe of this file
+-->
