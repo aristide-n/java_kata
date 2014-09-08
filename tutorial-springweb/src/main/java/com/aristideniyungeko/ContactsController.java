@@ -1,11 +1,11 @@
 package com.aristideniyungeko;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +27,8 @@ public class ContactsController {
 
    @Autowired private ContactFormValidator validator;
 
-   @InitBinder
+   Logger logger = Logger.getRootLogger();
+
    public void initBinder(WebDataBinder binder) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
       dateFormat.setLenient(false);
@@ -47,7 +48,7 @@ public class ContactsController {
    public ModelAndView getAllContacts() {
       ModelAndView mav = new ModelAndView("showContacts");
       List<Contact> contacts = contactsDAO.getAllContacts();
-      mav.addObject("SEARCH_CONTACTS_RESULT_KEY", contacts);
+      mav.addObject("SEARCH_CONTACTS_RESULTS_KEY", contacts);
       return mav;
    }
 

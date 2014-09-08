@@ -36,7 +36,8 @@
                       <form:input path="dob"></form:input>
                    </td>
                    <td align="left">
-                   <form:errors cssstyle="color:red" path="dob"></form:errors></td>
+                      <form:errors cssstyle="color:red" path="dob"></form:errors>
+                   </td>
                 </tr>
                 <tr>
                    <td align="right" width="100">Gender</td>

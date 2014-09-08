@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * TODO: documentation
@@ -23,7 +22,7 @@ public class Contact {
    @Column private String name;
    @Column private String address;
    @Column private String gender;
-   @Column private Date dob;
+   @Column private String dob;
    @Column private String email;
    @Column private String mobile;
    @Column private String phone;
@@ -65,11 +64,11 @@ public class Contact {
       this.gender = gender;
    }
 
-   public Date getDob() {
+   public String getDob() {
       return dob;
    }
 
-   public void setDob(Date dob) {
+   public void setDob(String dob) {
       this.dob = dob;
    }
 

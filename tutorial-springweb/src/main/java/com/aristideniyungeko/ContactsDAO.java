@@ -1,7 +1,9 @@
 package com.aristideniyungeko;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,7 @@ import java.util.List;
 public class ContactsDAO {
 
    @Autowired private SessionFactory sessionFactory;
+   Logger logger = Logger.getRootLogger();
 
    public Contact getById(int id) {
       return (Contact) sessionFactory.getCurrentSession().get(Contact.class, id);
@@ -32,6 +35,7 @@ public class ContactsDAO {
    @SuppressWarnings("unchecked")
    public List<Contact> getAllContacts() {
       Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Contact.class);
+      criteria.addOrder(Order.asc("name"));
       return criteria.list();
    }
 
