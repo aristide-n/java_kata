@@ -1,4 +1,4 @@
-package algorithms;
+package com.aristideniyungeko;
 
 /**
  * Created with IntelliJ IDEA.

@@ -9,3 +9,5 @@ out/
 production
 test
 build
+gradle
+gradlew*

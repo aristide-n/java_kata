@@ -1,4 +1,4 @@
-package algorithms;
+package com.aristideniyungeko;
 
 import java.util.Arrays;
 import java.awt.geom.Point2D;
