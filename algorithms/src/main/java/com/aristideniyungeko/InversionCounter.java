@@ -1,13 +1,13 @@
-package algorithms;
+package com.aristideniyungeko;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
