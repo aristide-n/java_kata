@@ -10,15 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 public class HelloWorldController implements Controller {
-	
-	public ModelAndView handleRequest(HttpServletRequest request, 
-									  HttpServletResponse response)
-									  throws ServletException, IOException {
 
-		String aMessage = "Hello Spring MVC world!";
-		ModelAndView modelAndView = new ModelAndView("hello-world");
-		modelAndView.addObject("message", aMessage);
+   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-		return modelAndView;
-	}
+      String aMessage = "Hello Spring MVC world!";
+      ModelAndView modelAndView = new ModelAndView("hello-world");
+      modelAndView.addObject("message", aMessage);
+
+      return modelAndView;
+   }
 }
