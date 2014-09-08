@@ -6,6 +6,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * TODO: documentation.
+ * Handles requests.
  */
 @Controller
 public class ContactsController {
@@ -29,6 +30,7 @@ public class ContactsController {
 
    Logger logger = Logger.getRootLogger();
 
+   @InitBinder
    public void initBinder(WebDataBinder binder) {
       SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
       dateFormat.setLenient(false);
@@ -37,7 +39,6 @@ public class ContactsController {
 
    @RequestMapping("/searchContacts")
    public ModelAndView searchContacts(@RequestParam(required = false, defaultValue = "") String name) {
-      // TODO make the param searchContacts?
       ModelAndView mav = new ModelAndView("showContacts");
       List<Contact> contacts = contactsDAO.searchContacts(name.trim());
       mav.addObject("SEARCH_CONTACTS_RESULTS_KEY", contacts);

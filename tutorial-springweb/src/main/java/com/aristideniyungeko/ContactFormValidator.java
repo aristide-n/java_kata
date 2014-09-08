@@ -6,7 +6,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
- * TODO: documentation.
+ * Handles contact data errors.
  */
 @Component("contactFormValidator")
 public class ContactFormValidator implements Validator {

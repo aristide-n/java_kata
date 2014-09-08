@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * TODO: documentation
+ * Data accessor using hibernate.
  */
 @Repository
 @Transactional

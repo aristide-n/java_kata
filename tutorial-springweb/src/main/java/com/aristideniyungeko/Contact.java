@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * TODO: documentation
+ * Defines a contact.
  */
 @Entity
 @Table(name="CONTACTS")
