@@ -6,7 +6,6 @@ out/
 *.sublime-project
 *.sublime-workspace
 .gradle
-production
 test
 build
 gradle
