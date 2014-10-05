@@ -1,0 +1,41 @@
+group = "aristiden7o"
+version = "0.1.0"
+
+buildscript {
+    project.ext {
+        bootVersion = '1.1.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath (
+            "org.springframework.boot:spring-boot-gradle-plugin:${project.bootVersion}",
+            "se.transmode.gradle:gradle-docker:1.2"
+        )
+    }
+}
+
+apply plugin: 'java'
+sourceCompatibility = 1.8
+
+apply plugin: 'spring-boot'
+mainClassName = 'com.aristideniyungeko.Controller'
+
+apply plugin: 'docker'
+distDocker {
+    exposePort 8080
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+        "org.springframework.boot:spring-boot-starter-web:${project.bootVersion}",
+        "org.springframework.boot:spring-boot-starter-jetty:${project.bootVersion}"
+    )
+
+    testCompile 'junit:junit:4.11'
+}
