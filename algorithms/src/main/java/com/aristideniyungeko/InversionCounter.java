@@ -13,6 +13,7 @@ import java.util.HashMap;
  * Created with IntelliJ IDEA.
  * User: Aristide
  * Date: 7/8/13
+ * TODO: See improvements at: http://stackoverflow.com/a/6424847
  */
 public class InversionCounter {
 
