@@ -8,12 +8,11 @@ import java.util.HashMap;
  */
 public class WeeksCounter {
    public static void main(String[] args) {
-      WeeksCounter s = new WeeksCounter();
-      System.out.println(s.countWeeks(2014, "April", "May", "Wednesday"));// == 7;
-      System.out.println(s.countWeeks(2015, "January", "April", "Thursday"));// == 15;
+      System.out.println(countWeeks(2014, "April", "May", "Wednesday"));// == 7;
+      System.out.println(countWeeks(2015, "January", "April", "Thursday"));// == 15;
    }
 
-   public int countWeeks(int Y, String A, String B, String W) {
+   public static int countWeeks(int Y, String A, String B, String W) {
       //1 find date of first sunday M
       //2 Iterate months from A to B
       //3 find number of first day in month P
