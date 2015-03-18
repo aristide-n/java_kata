@@ -33,7 +33,7 @@ public class WeeksCounter {
       days.put("Thursday", 4);
       days.put("Friday", 5);
       days.put("Saturday", 6);
-      int firstSunday = 1 + ((7- days.get(W)) % 7);
+      int firstSunday = 1 + (7 - days.get(W));
 
       // 2
       int[] daysInMonths = {31,28,31,30,31,30,31,31,30,31,30,31};
