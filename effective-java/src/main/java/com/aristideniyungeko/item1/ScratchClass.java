@@ -1,26 +1,23 @@
 package com.aristideniyungeko.item1;
 
+import java.util.Scanner;
+
 /**
  * Use Class<>.newInstance() as an Abstract factory
  */
 public class ScratchClass {
    public static void main(String[] args) {
-       ScratchClass sc = new ScratchClass();
+      Scanner sc = new Scanner(System.in);
 
-      Connection fooConn = sc.connectionBuilder(FooConnection.class);
-      Connection barConn = sc.connectionBuilder(BarConnection.class);
+      System.out.println("Enter text followed by Enter, type :q to finish:");
+      while (sc.hasNext()) {
+         String next = sc.next();
 
-      fooConn.connect();
-      barConn.connect();
-   }
+         if (next.equals(":q")) {
+            break;
+         }
 
-   Connection connectionBuilder(Class<? extends Connection> c) {
-      try {
-         return c.newInstance();
-      } catch (InstantiationException | IllegalAccessException e) {
-         e.printStackTrace();
+         System.out.println(next);
       }
-
-      return null;
    }
 }
