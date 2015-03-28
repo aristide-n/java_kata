@@ -1,4 +1,4 @@
 effective-java
 ==
 
-My coding lab for content in Effctive Java by Josh Bloch
+My coding lab for content in Effective Java by Josh Bloch
