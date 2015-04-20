@@ -30,7 +30,7 @@ public class Graph {
          throw new RuntimeException("invalid");
       }
 
-      for(int i = 0; i <= e; i++) {
+      for(int i = 0; i < e; i++) {
          int v = (int) (V * Math.random());
          int w = (int) (V * Math.random());
          addEdge(v, w);
@@ -112,9 +112,15 @@ public class Graph {
       return sb.toString();
    }
 
-   public Integer depthFirstSearch(int v, Object val) {
+   public Integer depthFirstSearch(Object val) {
       visited = new boolean[V];
-      return depthFirstSearchInternal(v, val);
+
+      Integer result = null;
+      for (int v = 0; result == null && v < V; v++) {
+         result = depthFirstSearchInternal(v, val);
+      }
+
+      return result;
    }
 
    private Integer depthFirstSearchInternal(int v, Object val) {
@@ -137,11 +143,21 @@ public class Graph {
       }
    }
 
-   public Integer breadthFirstSearch(int v, Object val) {
+   public Integer breadthFirstSearch (Object val) {
+      visited = new boolean[V];
+
+      Integer result = null;
+      for (int v = 0; result == null && v < V; v++) {
+         result = breadthFirstSearchInternal(v, val);
+      }
+
+      return result;
+   }
+
+   public Integer breadthFirstSearchInternal (int v, Object val) {
       if (values[v].equals(val)) {
          return v;
-      } else {
-         visited = new boolean[V];
+      } else if (!visited[v]) {
          visited[v] = true;
          Integer res = null;
          Queue<Integer> queue = new Queue<>();
@@ -160,15 +176,15 @@ public class Graph {
          }
 
          return res;
-      }
+      } else return null;
    }
 
    public static void main(String[] args) {
-      Graph G = new Graph(new Integer[] {1, 2, 3, 4, 5, 6, 7, 8, 9 ,0, 11}, 100);
+      Graph G = new Graph(new Integer[] {1, 2, 3, 4, 5, 6, 7, 8, 9 ,0, 11}, 0);
       System.out.println(G);
-      System.out.println(G.depthFirstSearch(5,9));
-      System.out.println(G.depthFirstSearch(2,12));
-      System.out.println(G.breadthFirstSearch(5,9));
-      System.out.println(G.breadthFirstSearch(2,12));
+      System.out.println(G.depthFirstSearch(9));
+      System.out.println(G.depthFirstSearch(12));
+      System.out.println(G.breadthFirstSearch(9));
+      System.out.println(G.breadthFirstSearch(12));
    }
 }
